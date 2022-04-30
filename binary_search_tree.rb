@@ -1,6 +1,5 @@
 class Tree 
   include Comparable
-  require 'pry'
   attr_accessor :root
 
   def initialize(array)
@@ -142,7 +141,6 @@ class Tree
       ptr.data > value ? ptr = ptr.left : ptr = ptr.right
     end
     previous_ptr.data > value ? previous_ptr.left = Node.new(value) : previous_ptr.right = Node.new(value)
-    #rebalance unless balanced?
   end
 
   def insert_recurssive(value,node = @root)
@@ -150,7 +148,6 @@ class Tree
     return node.right = Node.new(value) if value > node.data && node.right.nil?
     insert_recurssive(value,node.left) if value < node.data
     insert_recurssive(value,node.right) if value > node.data
-    #rebalance unless balanced?
   end
 
   class Node
@@ -164,22 +161,3 @@ class Tree
     end
   end
 end
-
-
-arr = (Array.new(15) { rand(1..100) })
-
-bst = Tree.new(arr)
-
-p bst.balanced?
-
-p bst.level_order, bst.preorder, bst.postorder, bst.inorder
-
-bst.insert(101) ; bst.insert(102) ; bst.insert_recurssive(210)
-
-p bst.balanced?
-
-bst.rebalance
-
-p bst.balanced?
-
-p bst.level_order, bst.preorder, bst.postorder, bst.inorder
